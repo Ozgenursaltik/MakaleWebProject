@@ -1,0 +1,167 @@
+﻿@using Makale_Entities
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Makale Web</title>
+
+    <!-- Ekleme Yaptık (başlangıç kısım) -->
+
+    <!-- Bootstrap Core CSS -->
+    @*<link href="css/bootstrap.min.css" rel="stylesheet">   KALDIRDIK *@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />  @*SOLUTIONDAN EKLEDİK*@
+
+
+    <!-- Custom CSS -->
+    @*<link href="css/shop-homepage.css" rel="stylesheet">   KALDIRDIK *@
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />  @*SOLUTIONDAN EKLEDİK*@
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <!-- /.container -->     @*EN AŞAĞIDAN ALDIK YAPIŞTIRDIK*@
+    <!-- jQuery -->
+    @*<script src="js/jquery.js"></script>   KALDIRDIK *@
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>  @*SOLUTIONDAN EKLEDİK*@
+
+    <!-- Bootstrap Core JavaScript -->
+    @*<script src="js/bootstrap.min.js"></script>    KALDIRDIK *@
+    <script src="~/Scripts/bootstrap.min.js"></script>     @*SOLUTIONDAN EKLEDİK*@
+
+    <!-- Ekleme Yaptık (bitiş kısım) -->
+
+</head>
+
+<body>
+    @{ 
+        Kullanici user = null;
+        if (Session["login"] !=null)
+        {
+            user =(Kullanici)Session["login"];
+        }
+    }
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home/Index">Makaleler</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    @if (user != null)
+                    {
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle glyphicon glyphicon-wrench" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">YönetimPaneli <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Not/Index">Makalelerim</a></li>
+                                <li><a href="/Not/Create">Makale Ekle</a></li>
+                                @if (user.Admin)
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/Kategori/Index">Kategoriler</a></li>
+                                    <li><a href="/Kategori/Create">Kategori Ekle</a></li>
+                                }
+
+
+
+
+                            </ul>
+                        </li>
+
+
+
+                        @*<li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-wrench"></span>Yönetim
+                            </a>
+                        </li>*@
+                    }
+
+                    <li>
+                        <a href="/Home/EnBegenilenler">
+                            <span class="glyphicon glyphicon-heart"></span>
+                            En Beğenilenler
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            Son Yazılanlar
+                        </a>
+                    </li>
+                    @*<li>
+            <a href="#">İletişim</a>
+        </li>*@
+                    @*<li>
+            <a href="#">Hakkımızda</a>
+        </li>*@
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (user==null)
+                     {
+                        <li>
+                           <a href="/Home/Login">
+                           <span class="glyphicon glyphicon-log-in"></span>
+                           Giriş
+                           </a>
+                        </li>
+
+                        <li>
+                            <a href="/Home/Register">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Üye Ol
+                            </a>
+                        </li>
+                     }
+                     else
+                     {
+                         <li>
+                            <a href="/Home/ProfilGoster">
+                            <span class="glyphicon glyphicon-user"></span>
+                            @user.KullaniciTakmaAdi
+                            </a>
+                         </li>
+                         <li>
+                            <a href="/Home/Logout">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            Çıkış
+                            </a>
+                            </li>
+                     }
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+   @RenderBody()
+
+    <div class="container">
+
+        @RenderSection("footer",required:false)
+       
+    </div>
+  
+</body>
+
+</html>

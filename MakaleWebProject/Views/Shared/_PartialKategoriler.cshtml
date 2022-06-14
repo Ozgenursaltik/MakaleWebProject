@@ -1,0 +1,24 @@
+﻿@using Makale_BLL
+@using Makale_Entities
+@{ 
+    KategoriYonet ky = new KategoriYonet();
+    List<Kategori> liste = ky.KategoriGetir();
+}
+
+
+
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="/Home/Index" class="list-group-item">
+        <span class="glyphicon glyphicon-align-right"></span>Tümü
+    </a>
+
+    @foreach (Kategori kategori in liste)
+    {
+
+        <a href="/Home/Kategori/@kategori.Id" class="list-group-item" title="@kategori.Aciklama">
+            <span class=" glyphicon glyphicon-align-right"></span>@kategori.KategoriBaslik
+        </a>
+
+    }
+</div>

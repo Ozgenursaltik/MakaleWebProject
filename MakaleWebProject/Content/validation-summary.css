@@ -1,0 +1,16 @@
+﻿
+.validation-summary-errors {
+    border: 2px solid;
+    color: black;
+    margin-bottom:10px;
+    border-radius:5px;
+    position:relative;
+    left:22rem;
+    width:1000px;
+    
+}
+
+    .validation-summary-errors ul {
+        list-style-type: none;
+        padding: 10px;
+    }

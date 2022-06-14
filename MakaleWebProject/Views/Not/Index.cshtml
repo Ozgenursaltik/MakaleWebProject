@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Makale_Entities.Not>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Makaleler</h2>
+        <hr />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Not/Create" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Yeni</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kategori.KategoriBaslik)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MakaleBaslik)
+                </th>             
+                <th>
+                    @Html.DisplayNameFor(model => model.BegeniSayisi)
+                </th>            
+                <th>
+                    @Html.DisplayNameFor(model => model.DegistirenKullanici)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kategori.KategoriBaslik)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MakaleBaslik)
+                    </td>                  
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BegeniSayisi)
+                    </td>                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DegistirenKullanici)
+                    </td>
+                    <td>
+                        <a href="/Not/Edit/@item.Id" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span>Düzenle</a>
+                        <a href="/Not/Details/@item.Id" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-search"></span>Detay</a>
+                        <a href="/Not/Delete/@item.Id" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>Sil</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+
